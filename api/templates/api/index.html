@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Manage Your Finances</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>💰 Expense Tracker</h1>
+        
+        <div id="authSection" class="auth-section">
+            <div id="loginForm">
+                <h2>Welcome Back</h2>
+                <div class="form-group">
+                    <input type="text" id="loginUsername" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="loginPassword" placeholder="Password">
+                </div>
+                <button onclick="login()">Login</button>
+                <button class="btn-secondary" onclick="showRegister()">Create Account</button>
+                <div id="loginError" class="error"></div>
+            </div>
+
+            <div id="registerForm" class="hidden">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <input type="text" id="regUsername" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="regEmail" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="regPassword" placeholder="Password">
+                </div>
+                <button onclick="register()">Register</button>
+                <button class="btn-secondary" onclick="showLogin()">Back to Login</button>
+                <div id="registerError" class="error"></div>
+            </div>
+        </div>
+
+        <div id="expenseSection" class="expense-section hidden">
+            <div class="user-info">
+                <span id="username"></span>
+                <button class="btn-secondary" onclick="logout()">Logout</button>
+            </div>
+            
+            <h2>➕ Add New Expense</h2>
+            <div class="form-group">
+                <input type="number" id="amount" placeholder="Amount ($)" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <select id="category" required>
+                    <option value="">Select Category</option>
+                    <option value="Food">🍔 Food</option>
+                    <option value="Transport">🚗 Transport</option>
+                    <option value="Entertainment">🎬 Entertainment</option>
+                    <option value="Healthcare">🏥 Healthcare</option>
+                    <option value="Shopping">🛍️ Shopping</option>
+                    <option value="Bills">💡 Bills</option>
+                    <option value="Other">📌 Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" id="description" placeholder="Description (optional)">
+            </div>
+            <div class="form-group">
+                <input type="date" id="date" required>
+            </div>
+            <button onclick="addExpense()">Add Expense</button>
+            <div id="expenseError" class="error"></div>
+            <div id="expenseSuccess" class="success"></div>
+
+            <div class="summary" id="summary"></div>
+
+            <h2>📊 Your Expenses</h2>
+            <div class="filter-section">
+                <input type="text" id="filterCategory" placeholder="Filter by category">
+                <input type="date" id="filterStart" placeholder="Start date">
+                <input type="date" id="filterEnd" placeholder="End date">
+                <div>
+                    <button onclick="loadExpenses()">Apply Filter</button>
+                    <button class="btn-secondary" onclick="clearFilters()">Clear</button>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="expenseList">
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: #999;">No expenses yet. Add your first expense above!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
