@@ -9,3 +9,4 @@ env/
 .idea/
 *.swp
 *.swo
+staticfiles/
