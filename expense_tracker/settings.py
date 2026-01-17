@@ -95,7 +95,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'api/static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+if os.environ.get('VERCEL'):
+    STATICFILES_STORAGE = 'whitenoise.storage.WhiteNoiseStaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

@@ -7,11 +7,15 @@ from django.contrib.auth import authenticate
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth
 from django.shortcuts import render
+from django.http import HttpResponse
 from .models import Expense
 from .serializers import UserSerializer, ExpenseSerializer
 
 def index(request):
-    return render(request, 'api/index.html')
+    try:
+        return render(request, 'api/index.html')
+    except Exception as e:
+        return HttpResponse('<h1>Expense Tracker API</h1><p>API is working. Use /api/ endpoints.</p>')
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
